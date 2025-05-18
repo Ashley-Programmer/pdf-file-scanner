@@ -19,7 +19,7 @@ Safe operation - Confirmation dialog before any deletion occurs
 
 - Clone this repository or download the script:
 
-bashgit clone https://github.com/yourusername/duplicate-file-scanner.git
+bashgit clone https://github.com/Ashley-Programmer/duplicate-file-scanner.git
 
 - No additional packages are required as this application uses only Python standard libraries.
 
