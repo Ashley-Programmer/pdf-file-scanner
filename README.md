@@ -1,64 +1,71 @@
-# pdf-file-scanner
+# Duplicate File Scanner
 
-Duplicate File Scanner
-A simple Python application that helps you find and manage duplicate files on your computer.
-Show Image
-Features
+A simple GUI application that scans folders for duplicate files and allows you to delete them to free up disk space.
 
-Easy-to-use graphical interface - No command line knowledge required
-Fast scanning - Uses MD5 hashing algorithm to efficiently identify duplicates
-Selective deletion - Choose which duplicate files to remove
-Safe operation - Confirmation dialog before any deletion occurs
+## Features
 
-# Requirements
+- Simple and intuitive graphical user interface
+- Scans selected folder and all subfolders for duplicate files
+- Uses MD5 hashing to identify duplicates (content-based comparison)
+- Displays list of duplicate files with checkboxes
+- Allows selective deletion of unwanted duplicates
+- Confirmation dialog before deletion to prevent accidents
 
-- Python3 or higher
+## How It Works
+
+The application works by:
+1. Calculating MD5 hash for each file in the selected directory and subdirectories
+2. Identifying files with identical hashes as duplicates
+3. Displaying found duplicates to the user
+4. Allowing the user to select and delete unwanted copies
+
+## Requirements
+
+- Python 3.x
 - Tkinter (usually comes pre-installed with Python)
 
-# Installation
+## Installation
 
-- Clone this repository or download the script:
+1. Clone this repository:
+```
+git clone https://github.com/yourusername/duplicate-file-scanner.git
+```
 
-- bashgit clone https://github.com/Ashley-Programmer/duplicate-file-scanner.git
+2. Navigate to the project directory:
+```
+cd duplicate-file-scanner
+```
 
-- No additional packages are required as this application uses only Python standard libraries.
+3. Run the application:
+```
+python duplicate_scanner.py
+```
 
-# Usage
+## Usage
 
-- Run the script:
+1. Click the "Scan for Duplicates" button
+2. Select the folder you want to scan
+3. Review the list of duplicate files
+4. Check the boxes next to files you want to delete
+5. Click "Delete Selected" to remove the selected duplicates
 
-bashpython duplicate_file_scanner.py
+## Known Issues
 
-Click the "Scan for Duplicates" button and select a folder to scan.
-The application will recursively search through the selected folder and all its subfolders.
-Any duplicate files found will be displayed as a list of checkboxes.
-Select the files you want to delete and click the "Delete Selected" button.
-Confirm the deletion when prompted.
+- The current implementation only scans the top-level directory due to a bug in the `Find_Duplicates` function
+- Variable naming inconsistency between `file_vars` and `File_Vars`
 
-# How It Works
+## Future Improvements
 
-The application walks through the directory tree of the selected folder.
-For each file, it calculates an MD5 hash of the file contents.
-It keeps track of files with identical hashes in a dictionary.
-Files with matching hashes are identified as duplicates.
-The user can then select which duplicates to remove.
+- Fix the recursive scanning to properly search all subdirectories
+- Add file size information to help in decision making
+- Group duplicates by content rather than showing a flat list
+- Add ability to exclude certain file types or directories
+- Implement file preview functionality
 
-# Known Limitations
+## License
 
-Very large files might take longer to hash.
-The application does not compare file names or dates, only content.
-There's currently no way to export the list of duplicates.
+MIT License - See LICENSE file for details.
 
-# Contributing
+## Contributing
+
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-- No duplicates found: Make sure you're scanning a folder that might contain duplicates.
-- Error hashing file: This usually occurs with system files or files that are currently in use.
-- Cannot delete file: The file might be in use by another program. Close the program and try again.
-
-# Future Improvements
-
-- Add ability to export list of duplicates
-- Implement more hash algorithms for comparison
-- Add file preview capability
-- Create portable executable versions for Windows/Mac
