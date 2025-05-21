@@ -8,15 +8,18 @@ def scan_folder():
     folder = filedialog.askdirectory() # ask user to choose folder
     if not folder:
         return
-    duplicates = Find_Duplicates(folder)
-    display_duplicates(duplicates)
+    duplicates = Find_Duplicates(folder) # find duplicate files within selected folder
+    display_duplicates(duplicates) # display duplicate files
 
+# function to search for duplicates
 def Find_Duplicates(folder):
-    files_hashes = {}
-    duplicates = []
+    
+    files_hashes = {} # dictionary to store file hashes
+    duplicates = [] # list to store duplicate files
 
     # traverse the folder and get file hashes
-    for Root, dirs, files in os.walk(folder):
+    for Root, dirs, files in os.walk(folder): # os.walk() to traverse/iterate through all files in the folder
+        
         for file in files:
             file_path = os.path.join(Root, file)
             file_hash = hash_file(file_path)
@@ -26,7 +29,7 @@ def Find_Duplicates(folder):
             else:
                 files_hashes[file_hash] = file_path
 
-        return duplicates
+    return duplicates
 
 
 def hash_file(file_path):
@@ -39,19 +42,21 @@ def hash_file(file_path):
         print(f"Error hashing file {file_path}")
     return hash_md5.hexdigest()
 
-global file_vars
+
 def display_duplicates(duplicates):
+    global file_vars
+    
     # display duplicates as checkboxes for selection
     for widget in frame.winfo_children():
         widget.destroy()
     if duplicates:
-        File_Vars = [] # store checkbox variables
+        file_Vars = [] # store checkbox variables
 
         for file in duplicates:
             var = tk.BooleanVar()
             chk = tk.Checkbutton(frame, text=file, variable=var, anchor="w")
             chk.pack(fill="x")
-            File_Vars.append((var, file)) # store checkbox and file path
+            file_Vars.append((var, file)) # store checkbox and file path
         delete_button.pack(pady=10)
     else:
         messagebox.showinfo("No duplicates", "No duplicate files found.")
@@ -64,8 +69,7 @@ def delete_selected():
         messagebox.showwarning("No Selection", "Please select at least one file to delete!")
         return
 
-    confirm = messagebox.askyesno("Confirm deletion",
-                                  f"Are you sure you want to delete {len(selected_files)} files?")
+    confirm = messagebox.askyesno("Confirm deletion", f"Are you sure you want to delete {len(selected_files)} files?")
     if confirm:
         for file in selected_files:
             try:
@@ -79,7 +83,7 @@ def delete_selected():
 # set up Tkinter UI
 root = tk.Tk()
 root.title("Duplicate File Scanner")
-root.geometry("800x300+300+200")
+root.geometry("800x500+300+200")
 root.resizable(False, False)
 
 label = tk.Label(root, text="File Scanner", font=('Arial', 20, "bold"))
